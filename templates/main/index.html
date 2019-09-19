@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col mt-4">
+        <h2>Add Item</h2>
+        <form action="{% url 'main:add_todo' %}" method="post" class="form-inline">
+            {% csrf_token %}
+            <input type="text" class="form-control mb-2 mr-sm-2" name="todo" id="to-do" placeholder="type here..">
+            <button type="submit" class="btn btn-primary mb-2">Add</button>
+        </form>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+    <ul class="list-group">
+    {% if todos %}
+        {% for todo in todos %}
+            <li class="list-group-item">{{ todo.text }}
+                <div class="float-right">
+                    <form action="{% url 'main:delete' todo.id %}" method="post">
+                        {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="material-icons" style="color: #ff201e">delete_forever</i>
+                    </button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li class="list-group-item">No tasks yet</li>
+    {% endif %}
+    </ul>
+    </div>
+</div>
+{% endblock content %}
