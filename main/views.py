@@ -15,7 +15,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = "todos"
 
     def get_queryset(self):
-        return Todo.objects.filter(user=self.request.get('user')).order_by("-added_date")
+        return Todo.objects.filter(user=self.request.user).order_by("-added_date")
 
 
 @login_required
