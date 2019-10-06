@@ -25,7 +25,7 @@ def user_login(request):
                 else:
                     return HttpResponse("Disabled account.")
             else:
-                return HttpResponseRedirect(reverse("accounts:register"))
+                return HttpResponseRedirect(reverse("accounts:login"))
     context = {'form': form}
     return render(request, 'accounts/login.html', context)
 
